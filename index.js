@@ -39,6 +39,11 @@ app.set('view engine', 'handlebars');
  * Routes
  * ===================================
  */
+app.get('/new', (request, response) => {
+  // respond with HTML page with form to create new pokemon
+  response.render('new');
+});
+
 app.get('/:id/edit', (request, response) => {
 
   let client = new Client({
@@ -59,7 +64,7 @@ app.get('/:id/edit', (request, response) => {
     values = [request.params.id];
 
     client.query(query, values, (err, res) => {
-      
+
       if (err) {
         console.log("query error", err.message);
       } else {
@@ -213,10 +218,6 @@ app.post('/', (request, response) => {
   });
 });
 
-app.get('/new', (request, response) => {
-  // respond with HTML page with form to create new pokemon
-  response.render('new');
-});
 
 
 app.post('/pokemon', (req, response) => {
